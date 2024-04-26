@@ -26,8 +26,8 @@ public class BaseClient: ZkSyncClient {
         self.transport = HTTPTransport(self.web3.provider.url)
     }
     
-    public init(_ providerURL: URL, token: String) {
-        self.web3 = Web3(provider: Web3HttpProvider(url: providerURL, network: .Mainnet))
+    public init(_ providerURL: URL, token: String, chainID: BigUInt) {
+        self.web3 = Web3(provider: Web3HttpProvider(url: providerURL, network: .Custom(networkId: chainID)))
         self.transport = HTTPTransport(self.web3.provider.url, token: token)
     }
     
