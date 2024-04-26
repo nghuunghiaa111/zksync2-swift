@@ -33,6 +33,17 @@ class HTTPTransport: Transport {
         self.session = Session(configuration: configuration)
     }
     
+    init(_ url: URL, token: String) {
+        self.url = url
+        let configuration = URLSessionConfiguration.default
+        var headers = configuration.httpAdditionalHeaders ?? [:]
+        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
+        headers["Authorization"] = "Bearer \(token)"
+        configuration.httpAdditionalHeaders = headers
+        self.session = Session(configuration: configuration)
+    }
+    
     func send<R>(method: String, parameters: [JRPC.Parameter]?) async throws -> R where R : Decodable {
         try await send(method: method,
              parameters: parameters,

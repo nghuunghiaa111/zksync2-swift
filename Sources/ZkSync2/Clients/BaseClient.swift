@@ -26,6 +26,11 @@ public class BaseClient: ZkSyncClient {
         self.transport = HTTPTransport(self.web3.provider.url)
     }
     
+    public init(_ providerURL: URL, token: String) {
+        self.web3 = Web3(provider: Web3HttpProvider(url: providerURL, network: .Mainnet))
+        self.transport = HTTPTransport(self.web3.provider.url, token: token)
+    }
+    
     public func estimateFee(_ transaction: CodableTransaction) async throws -> Fee {
         let parameters = [
             JRPC.Parameter(type: .transactionParameters, value: transaction.encodeAsDictionary(from: transaction.from))
