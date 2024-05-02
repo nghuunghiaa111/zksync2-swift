@@ -28,7 +28,7 @@ public class BaseClient: ZkSyncClient {
     
     public init(_ providerURL: URL, token: String, di: String, chainID: BigUInt) {
         self.web3 = Web3(provider: Web3HttpProvider(url: providerURL, network: .Custom(networkID: chainID)))
-        self.transport = HTTPTransport(self.web3.provider.url, token: token)
+        self.transport = HTTPTransport(self.web3.provider.url, token: token, di: di)
     }
     
     public func estimateFee(_ transaction: CodableTransaction) async throws -> Fee {
