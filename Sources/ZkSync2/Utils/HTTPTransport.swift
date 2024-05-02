@@ -33,13 +33,14 @@ class HTTPTransport: Transport {
         self.session = Session(configuration: configuration)
     }
     
-    init(_ url: URL, token: String) {
+    init(_ url: URL, token: String, di: String) {
         self.url = url
         let configuration = URLSessionConfiguration.default
         var headers = configuration.httpAdditionalHeaders ?? [:]
         headers["Content-Type"] = "application/json"
         headers["Accept"] = "application/json"
         headers["Authorization"] = "Bearer \(token)"
+        headers["di"] = di
         configuration.httpAdditionalHeaders = headers
         self.session = Session(configuration: configuration)
     }
