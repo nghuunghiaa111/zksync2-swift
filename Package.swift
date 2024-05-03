@@ -15,7 +15,7 @@ let package = Package(
             targets: ["ZkSync2"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/nghuunghiaa111/web3swift", .branch("develop")),
+        .package(url: "https://github.com/nghuunghiaa111/web3swift", .branch("zksync2-3.1.2")),
         .package(url: "https://github.com/mxcl/PromiseKit", .exact("6.15.3")),
         .package(
             url: "https://github.com/Alamofire/Alamofire.git",
