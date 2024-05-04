@@ -82,7 +82,15 @@ class HTTPTransport: Transport {
                     break
                 }
 #else
-                completion(response.result.mapError({ self.processAFError($0) }))
+                // completion(response.result.mapError({ self.processAFError($0) }))
+                switch response.result {
+                case .success(let result):
+                    continuation.resume(with: .success(result))
+                case .failure(let error):
+                    let error = self.processAFError(error)
+                    continuation.resume(throwing: error)
+                    break
+                }
 #endif
             }
         })
