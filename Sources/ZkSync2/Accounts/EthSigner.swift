@@ -99,7 +99,7 @@ public class BaseSigner: ETHSigner {
         domain = EIP712Domain(zkSyncNetwork)
     }
     
-    init(_ privateKey: String, chainId: BigUInt) {
+    public init(_ privateKey: String, chainId: BigUInt) {
         credentials = Credentials(privateKey)
         domain = EIP712Domain(chainId)
     }
