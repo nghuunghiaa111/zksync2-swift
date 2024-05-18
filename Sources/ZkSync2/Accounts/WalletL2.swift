@@ -96,10 +96,10 @@
             
             // let fee = try! await zkSync.estimateFee(transaction)
             if transaction.maxFeePerGas == nil || transaction.maxFeePerGas == .zero {
-                transaction.maxFeePerGas = BigUInt(200_000_000)
+                transaction.maxFeePerGas = BigUInt(30_000_000_000)
             }
             if transaction.maxPriorityFeePerGas == nil || transaction.maxPriorityFeePerGas == .zero {
-                transaction.maxPriorityFeePerGas = BigUInt(20_000_000)
+                transaction.maxPriorityFeePerGas = BigUInt(30_000_000_000)
             }
             if transaction.eip712Meta == nil {
                 transaction.eip712Meta = EIP712Meta(gasPerPubdata: BigUInt(50_000))
