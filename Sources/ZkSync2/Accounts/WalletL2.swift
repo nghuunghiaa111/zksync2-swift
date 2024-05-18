@@ -95,19 +95,19 @@
             }
             
             // let fee = try! await zkSync.estimateFee(transaction)
-            if transaction.maxFeePerGas == nil || transaction.maxFeePerGas == .zero {
-                transaction.maxFeePerGas = BigUInt(1000000)
-            }
-            if transaction.maxPriorityFeePerGas == nil || transaction.maxPriorityFeePerGas == .zero {
-                transaction.maxPriorityFeePerGas = BigUInt(1000000)
-            }
+            // if transaction.maxFeePerGas == nil || transaction.maxFeePerGas == .zero {
+            //     transaction.maxFeePerGas = BigUInt(1000000)
+            // }
+            // if transaction.maxPriorityFeePerGas == nil || transaction.maxPriorityFeePerGas == .zero {
+            //     transaction.maxPriorityFeePerGas = BigUInt(1000000)
+            // }
             if transaction.eip712Meta == nil {
                 transaction.eip712Meta = EIP712Meta(gasPerPubdata: BigUInt(50_000))
             } else if transaction.eip712Meta?.gasPerPubdata == nil {
                 transaction.eip712Meta?.gasPerPubdata = BigUInt(50_000)
             }
             if transaction.gasLimit == .zero {
-                transaction.gasLimit = BigUInt(1000000)
+                transaction.gasLimit = BigUInt(10000000)
             }
         }
         
