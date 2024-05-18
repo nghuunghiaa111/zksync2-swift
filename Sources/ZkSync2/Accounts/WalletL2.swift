@@ -94,13 +94,13 @@
                 transaction.nonce = nonce
             }
             
-            // let fee = try! await zkSync.estimateFee(transaction)
-            // if transaction.maxFeePerGas == nil || transaction.maxFeePerGas == .zero {
-            //     transaction.maxFeePerGas = BigUInt(1000000)
-            // }
-            // if transaction.maxPriorityFeePerGas == nil || transaction.maxPriorityFeePerGas == .zero {
-            //     transaction.maxPriorityFeePerGas = BigUInt(1000000)
-            // }
+            let fee = try! await zkSync.estimateFee(transaction)
+            if transaction.maxFeePerGas == nil || transaction.maxFeePerGas == .zero {
+                transaction.maxFeePerGas = BigUInt(10000000)
+            }
+            if transaction.maxPriorityFeePerGas == nil || transaction.maxPriorityFeePerGas == .zero {
+                transaction.maxPriorityFeePerGas = BigUInt(10000000)
+            }
             if transaction.eip712Meta == nil {
                 transaction.eip712Meta = EIP712Meta(gasPerPubdata: BigUInt(50_000))
             } else if transaction.eip712Meta?.gasPerPubdata == nil {
