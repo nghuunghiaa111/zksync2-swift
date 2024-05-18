@@ -80,6 +80,36 @@
                 transaction.gasLimit = fee.gasLimit
             }
         }
+
+        public func populateTransactionWithFixedFee(_ transaction: inout CodableTransaction) async {
+            if transaction.chainID == nil || transaction.chainID != signer.domain.chainId {
+                transaction.chainID = signer.domain.chainId
+            }
+            if transaction.nonce == .zero {
+                let nonce = try! await web.eth.getTransactionCount(
+                    for: EthereumAddress(signer.address)!,
+                    onBlock: .pending
+                )
+                
+                transaction.nonce = nonce
+            }
+            
+            // let fee = try! await zkSync.estimateFee(transaction)
+            if transaction.maxFeePerGas == nil || transaction.maxFeePerGas == .zero {
+                transaction.maxFeePerGas = BigUInt(1000000)
+            }
+            if transaction.maxPriorityFeePerGas == nil || transaction.maxPriorityFeePerGas == .zero {
+                transaction.maxPriorityFeePerGas = BigUInt(1000000)
+            }
+            if transaction.eip712Meta == nil {
+                transaction.eip712Meta = EIP712Meta(gasPerPubdata: BigUInt(50_000))
+            } else if transaction.eip712Meta?.gasPerPubdata == nil {
+                transaction.eip712Meta?.gasPerPubdata = BigUInt(50_000)
+            }
+            if transaction.gasLimit == .zero {
+                transaction.gasLimit = BigUInt(1000000)
+            }
+        }
         
         public func sendTransaction(_ transaction: CodableTransaction) async throws -> TransactionSendingResult {
             try await zkSync.web3.eth.send(raw: transaction.encode(for: .transaction)!)
