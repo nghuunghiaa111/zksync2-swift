@@ -107,7 +107,7 @@
                 transaction.eip712Meta?.gasPerPubdata = BigUInt(50_000)
             }
             if transaction.gasLimit == .zero {
-                transaction.gasLimit = BigUInt(10000000)
+                transaction.gasLimit = BigUInt(1000000)
             }
         }
         
