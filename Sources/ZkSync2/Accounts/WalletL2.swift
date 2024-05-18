@@ -95,12 +95,12 @@
             }
             
             // let fee = try! await zkSync.estimateFee(transaction)
-            let maxPriorityFeePerGas =try! await ethClient.maxPriorityFeePerGas()
+            let maxPriorityFeePerGas = try! await ethClient.maxPriorityFeePerGas()
             if transaction.maxFeePerGas == nil || transaction.maxFeePerGas == .zero {
                 transaction.maxFeePerGas = maxPriorityFeePerGas
             }
             if transaction.maxPriorityFeePerGas == nil || transaction.maxPriorityFeePerGas == .zero {
-                transaction.maxPriorityFeePerGas = ==maxPriorityFeePerGas
+                transaction.maxPriorityFeePerGas = maxPriorityFeePerGas
             }
             if transaction.eip712Meta == nil {
                 transaction.eip712Meta = EIP712Meta(gasPerPubdata: BigUInt(50_000))
