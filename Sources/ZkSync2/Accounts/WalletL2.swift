@@ -94,7 +94,7 @@
                 transaction.nonce = nonce
             }
             
-            let fee = try! await zkSync.estimateFee(transaction)
+            // let fee = try! await zkSync.estimateFee(transaction)
             if transaction.maxFeePerGas == nil || transaction.maxFeePerGas == .zero {
                 transaction.maxFeePerGas = BigUInt(10000000)
             }
